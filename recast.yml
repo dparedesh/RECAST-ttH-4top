@@ -1,0 +1,24 @@
+name: analysis/ttH4tSSML
+metadata:
+  author: Daniela Paredes
+  input requirements: Input signal
+  short_description: 'RECAST analysis for EXOT-2019-026: ttH->4tops (SSML)'
+spec:
+  workflow: workflow.yml
+example_inputs:
+  default:
+    dataopts:
+      initdir: /Users/DanielaParedes/RECAST/submitSignal/508789_BDT400
+    initdata:
+      input_pMassBDT: '400'
+      dids: '508789'
+      XSxEff: '0.000143'
+      kfactor: '1.0'
+      shower: pythia8
+      nominalWeight: '' # "My test weight"'
+      muMin: '0'
+      muMax: '10'
+      pileupFile: 'root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/PILEUP/pileup.root'
+      input_mc16a: root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/Signal_DxAOD/mc16_13TeV.508789.MGPy8EG_A14N23LO_DM_4topscalar_p350_c1_nonallhad.deriv.DAOD_TOPQ1.e8485_a875_r9364_p4031
+      input_mc16d: root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/Signal_DxAOD/mc16_13TeV.508789.MGPy8EG_A14N23LO_DM_4topscalar_p350_c1_nonallhad.deriv.DAOD_TOPQ1.e8485_a875_r10201_p4031
+      input_mc16e: root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/Signal_DxAOD/mc16_13TeV.508789.MGPy8EG_A14N23LO_DM_4topscalar_p350_c1_nonallhad.deriv.DAOD_TOPQ1.e8485_a875_r10724_p4031

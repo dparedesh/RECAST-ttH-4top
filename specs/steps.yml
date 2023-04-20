@@ -1,0 +1,150 @@
+online_production_mc16:
+  process:
+    process_type: interpolated-script-cmd
+    script: |
+      # Source the ATLAS environment
+      rm ../Framework/TTHbbAnalysis/CMakeLists.txt
+      source /home/atlas/release_setup.sh
+      cmake ../Framework
+      cmake --build ./
+      source */setup.sh
+      cd ../preProd/
+
+      #/recast_auth/getkrb.sh
+
+      # creating input TopDataPreparation      
+      echo {dids} {XSxEff} {kfactor} {shower}  >>  My-XSection-MC16-13TeV.data
+
+      #if nominal weight input is  not empty, then reset the nominal weight in l64 to use the one from recast
+      myNominal='{nominalWeight}'
+      if [[ ! -z $myNominal ]] && [[ "$myNominal" != *"/"* ]]; then sed -i "64s/.*/NominalWeightNames $myNominal/" cuts_'{mc16}'_SM4tops_SSML_syst.txt; fi
+
+      # assigning pileup file (samples are either FS or AF)
+      varPileup='{pileup}'
+      if [[ ! -z $varPileup ]] && [[ "$varPileup" != *"/" ]]; then sed -i "135s/.*/PRWConfigFiles_FS pileup.root/" cuts_'{mc16}'_SM4tops_SSML_syst.txt; fi
+      if [[ ! -z $varPileup ]] && [[ "$varPileup" != *"/" ]]; then sed -i "136s/.*/PRWConfigFiles_AF pileup.root/" cuts_'{mc16}'_SM4tops_SSML_syst.txt; fi
+
+      # forcing online production to use the just created x-section file
+      sed -i '49 i TDPPath My-XSection-MC16-13TeV.data' cuts_'{mc16}'_SM4tops_SSML_syst.txt
+
+      cat cuts_'{mc16}'_SM4tops_SSML_syst.txt
+
+      cp cuts_'{mc16}'_SM4tops_SSML_syst.txt '{test}'
+
+      #####
+      # copy samples from EOS: samples must be copied to workdir and not inside the container to avoid crashed jobs
+      mkdir -p '{localDir}'/inputfile
+      xrdcp -r '{input_mc16}' '{localDir}'/inputfile/
+
+      #####
+      # copy pileup.root file from EOS
+      if [[ ! -z $varPileup ]] && [[ "$varPileup" != *"/" ]]; then xrdcp  '{pileup}'  pileup.root; fi
+      #ls *
+
+      # adding samples to inputfile
+      ls '{localDir}'/inputfile/*mc16_13TeV*/* > input_signal.txt
+      ####      
+
+      ## Running online ntuple production       
+      top-xaod cuts_'{mc16}'_SM4tops_SSML_syst.txt input_signal.txt
+      rm -rf '{localDir}'/inputfile
+      cp output.root '{output_file_mc16}'
+
+      ## Preparing post-production
+      cd ../postProd/
+
+      ## copy x-section file created above to postProd directory
+      cp ../preProd/My-XSection-MC16-13TeV.data .
+
+      ## creating folder where the job will run
+      mkdir job
+      cd job
+      mv ../../preProd/output.root .
+      cp ../*.SSML.txt .
+      cat configuration.SSML.txt
+      ls *.root > inputfile_off.txt
+
+      ## Running offline ntuple production
+      SM4t-offline configuration.SSML.txt inputfile_off.txt
+
+      ## renaming output file
+      mv test '{output_offline_mc16}'
+      cd '{output_offline_mc16}'
+      mv 2lss3lge1DL1r/ttbar_powpyt8.root  2lss3lge1DL1r/signal.root
+
+  environment:
+    environment_type: docker-encapsulated
+    image: gitlab-registry.cern.ch/atlas-phys/exot/hqt/bsm_h_4t/common-framework
+    imagetag: recast-exot-2019-26-a13fd138
+    resources:
+      - kerberos: true
+      - kubernetes_memory_limit: '10Gi'
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      offline_ntuple: '{ntuple}'
+
+
+interpretation:
+  process:
+    process_type: interpolated-script-cmd
+    interpreter: bash
+    script: |
+
+      # moving to parent dir
+      cd ../../code/src/TRExFitter/
+
+      #/recast_auth/getkrb.sh
+
+      # setup environment
+      #source ./home/atlas/release_setup.sh
+      source ./TRExFitter/build/x86_64-centos7-gcc8-opt/setup.sh
+
+      # copy config file
+      mkdir fitConfig 
+      xrdcp -r {input_config}/fitConf_mH_{input_pMassBDT}.config fitConfig/
+      xrdcp -r {input_config}/Replacement_13July2021.txt  fitConfig/
+
+      # copy bkg histos
+      mkdir -p recast_output/signal_mH_{input_pMassBDT}/Histograms
+      xrdcp -r {input_histos}/FourTop_CR1b3le_histos.root  recast_output/signal_mH_{input_pMassBDT}/Histograms/
+      xrdcp -r {input_histos}/FourTop_CR1b3lm_histos.root  recast_output/signal_mH_{input_pMassBDT}/Histograms/     
+      xrdcp -r {input_histos}/FourTop_CRLowBDT_L055_histos.root  recast_output/signal_mH_{input_pMassBDT}/Histograms/
+      xrdcp -r {input_histos}/FourTop_CRttbarCO2l_MeePVCO_histos.root  recast_output/signal_mH_{input_pMassBDT}/Histograms/
+      xrdcp -r {input_histos}/FourTop_CRttW2l_histos.root  recast_output/signal_mH_{input_pMassBDT}/Histograms/
+      xrdcp -r {input_histos}/FourTop_SR_BSMBDT_{input_pMassBDT}_L055_histos.root  recast_output/signal_mH_{input_pMassBDT}/Histograms/
+
+      # getting signal ntuples
+      mkdir -p inputFiles/mc16a/2lss3lge1DL1r
+      mkdir -p inputFiles/mc16d/2lss3lge1DL1r     
+      mkdir -p inputFiles/mc16e/2lss3lge1DL1r 
+
+      xrdcp -r {input_signal_mc16a} inputFiles/mc16a/2lss3lge1DL1r/
+      xrdcp -r {input_signal_mc16d} inputFiles/mc16d/2lss3lge1DL1r/
+      xrdcp -r {input_signal_mc16e} inputFiles/mc16e/2lss3lge1DL1r/
+
+      # changing mu_min and mu_max in fitConfiguration file
+      sed -i  '3822 c\  Min: {muMin}' fitConfig/fitConf_mH_{input_pMassBDT}.config
+      sed -i  '3823 c\  Max: {muMax}' fitConfig/fitConf_mH_{input_pMassBDT}.config
+
+
+      cat fitConfig/fitConf_mH_{input_pMassBDT}.config
+
+      # getting signal histos
+      trex-fitter n fitConfig/fitConf_mH_{input_pMassBDT}.config "Samples=signalBSM:Systematics=luminosity,pileup_reweighting,signalBSM_PDF,jet_vertex_tagger,ATLAS_*:Exclude=ATLAS_JER_DataVsMC,ATLAS_EM_SCALE,ATLAS_JES_Flavor_Composition_Bkg,ATLAS_JES_PunchThrough_MC16:Update=TRUE:Regions=CRttbarCO2l_MeePVCO,CR1b3lm,CR1b3le,CRttW2l,CRLowBDT_L055,SR_BSMBDT_{input_pMassBDT}_L055"
+      # computing upper limit
+      trex-fitter wfl fitConfig/fitConf_mH_{input_pMassBDT}.config "Regions=CRttbarCO2l_MeePVCO,CR1b3lm,CR1b3le,CRttW2l,CRLowBDT_L055,SR_BSMBDT_{input_pMassBDT}_L055"
+      trex-fitter dp fitConfig/fitConf_mH_{input_pMassBDT}.config "Regions=CRttbarCO2l_MeePVCO,CR1b3lm,CR1b3le,CRttW2l,CRLowBDT_L055,SR_BSMBDT_{input_pMassBDT}_L055"
+
+      mv recast_output  '{output_folder}'
+
+  environment:
+    environment_type: docker-encapsulated
+    image: gitlab-registry.cern.ch/atlas-phys/exot/hqt/bsm_h_4t/trexfitter 
+    imagetag: master-5603c751
+    resources:
+      - kerberos: true
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      output: '{output_folder}'

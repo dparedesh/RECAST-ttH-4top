@@ -1,0 +1,76 @@
+stages:
+- name: online_production_mc16a_step
+  dependencies: [init]
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      input_mc16: {step: init, output: input_mc16a}
+      pileup: {step: init, output: pileupFile}
+      dids: {step: init, output: dids}
+      XSxEff: {step: init, output: XSxEff}
+      kfactor: {step: init, output: kfactor}
+      shower: {step: init, output: shower}
+      nominalWeight: {step: init, output: nominalWeight}
+      output_file_mc16: '{workdir}/output_mc16a.root'
+      output_offline_mc16: '{workdir}/mc16a'
+      ntuple: '{workdir}/mc16a/2lss3lge1DL1r/signal.root'
+      test: '{workdir}/test.txt'
+      localDir: '{workdir}'
+      mc16: 'mc16a'
+    step: {$ref: steps.yml#/online_production_mc16}
+
+- name: online_production_mc16d_step
+  dependencies: [init]
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      input_mc16: {step: init, output: input_mc16d}
+      pileup: {step: init, output: pileupFile}
+      dids: {step: init, output: dids}
+      XSxEff: {step: init, output: XSxEff}
+      kfactor: {step: init, output: kfactor}
+      shower: {step: init, output: shower}
+      nominalWeight: {step: init, output: nominalWeight}
+      output_file_mc16: '{workdir}/output_mc16d.root'
+      output_offline_mc16: '{workdir}/mc16d'
+      ntuple: '{workdir}/mc16d/2lss3lge1DL1r/signal.root'
+      test: '{workdir}/test.txt'
+      localDir: '{workdir}'
+      mc16: 'mc16d'
+    step: {$ref: steps.yml#/online_production_mc16}
+
+- name: online_production_mc16e_step
+  dependencies: [init]
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      input_mc16: {step: init, output: input_mc16e}
+      pileup: {step: init, output: pileupFile}
+      dids: {step: init, output: dids}
+      XSxEff: {step: init, output: XSxEff}
+      kfactor: {step: init, output: kfactor}
+      shower: {step: init, output: shower}
+      nominalWeight: {step: init, output: nominalWeight}
+      output_file_mc16: '{workdir}/output_mc16e.root'
+      output_offline_mc16: '{workdir}/mc16e'
+      ntuple: '{workdir}/mc16e/2lss3lge1DL1r/signal.root'
+      test: '{workdir}/test.txt'
+      localDir: '{workdir}'
+      mc16: 'mc16e'
+    step: {$ref: steps.yml#/online_production_mc16}
+
+- name: interpretation_step
+  dependencies: [init,online_production_mc16a_step,online_production_mc16d_step,online_production_mc16e_step]
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      input_signal_mc16a: {step: online_production_mc16a_step, output: offline_ntuple}
+      input_signal_mc16d: {step: online_production_mc16d_step, output: offline_ntuple}
+      input_signal_mc16e: {step: online_production_mc16e_step, output: offline_ntuple}
+      input_pMassBDT:  {step: init, output: input_pMassBDT}
+      muMin: {step: init, output: muMin}
+      muMax: {step: init, output: muMax}
+      input_config: "root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/fitConf/"
+      input_histos: "root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/histograms/"
+      output_folder: '{workdir}/recast_output/'
+    step: {$ref: steps.yml#/interpretation} 
