@@ -109,7 +109,7 @@ The results obtained with this tool can be seen in Figures 1 and 2.  The tool wa
 <p align="center"><sub>Figure 1: Upper limits computed at 95% CL on the production rate of the  $t\bar tH/A \rightarrow t\bar tt\bar t$ signal (left)[1], and $S_8S_8 \rightarrow t\bar tt\bar t$ signal (right) [3]. </sup></p>  
 
 <p align="center">
-<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/f105f653-3d31-46ea-82e5-a708b6142f59" align="center" height="270"  ></a>
-<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/2ce4926b-67b7-4c6a-9890-bcfa21127d94" align="center" height="270"  ></a>     
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/f105f653-3d31-46ea-82e5-a708b6142f59" align="center" height="230"  ></a>
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/2ce4926b-67b7-4c6a-9890-bcfa21127d94" align="center" height="230"  ></a>     
 </p>
 <p align="center"><sub>Figure 2: Upper limits computed at 95% CL on the production rate of a scalar (left) and pseudoscalar particle (right) in dark mark models [2]. </sup></p>  
