@@ -94,4 +94,22 @@ The workflow will output the full folder of results as provided by [TRexFitter](
 
 # Official results obtained with this tool
 
+The results obtained with this tool can be seen in Figures 1 and 2.  The tool was originally written for Ref. [1]. The results of Refs. [2, 3] were fully obtained with the recasted software from this repository. The official results are detailed in the following publications:
+
+
 1. ATLAS Collaboration, *Search for* $t\bar tH/A \rightarrow t\bar tt\bar t$ *production in the multilepton final state in proton–proton collisions at* $\sqrt{s}=13$ *TeV with the ATLAS detector*, [JHEP 07 (2023) 203](https://inspirehep.net/literature/2175533).
+2. ATLAS Collaboration, *Constraints on dark matter models involving an* $s$*-channel mediator with the ATLAS detector in* $pp$ *collisions at* $\sqrt{s}=13$ *TeV*, [arXiv:2404.15930 [hep-ex]](https://arxiv.org/abs/2404.15930).
+3. ATLAS Collaboration, *Search for top-quark-associated production of heavy scalar or pseudoscalar in* $pp$ *collisions at 13 TeV*, [ATLAS-CONF-2024-002](https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/CONFNOTES/ATLAS-CONF-2024-002/).
+
+
+<p align="center">
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/6ace51d4-ffa4-466f-aa45-ee0bb1eb18bc" align="center" height="300"  ></a>
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/41a47230-b682-4f3a-aa55-5fa7408b236e" align="center" height="310"  ></a>    
+</p>
+<p align="center"><sub>Figure 1: Upper limits computed at 95% CL on the production rate of the  $t\bar tH/A \rightarrow t\bar tt\bar t$ signal (left)[1], and $S_8S_8 \rightarrow t\bar tt\bar t$ signal (right) [3]. </sup></p>  
+
+<p align="center">
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/f105f653-3d31-46ea-82e5-a708b6142f59" align="center" height="270"  ></a>
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/2ce4926b-67b7-4c6a-9890-bcfa21127d94" align="center" height="270"  ></a>     
+</p>
+<p align="center"><sub>Figure 2: Upper limits computed at 95% CL on the production rate of a scalar (left) and pseudoscalar particle (right) in dark mark models [2]. </sup></p>  
