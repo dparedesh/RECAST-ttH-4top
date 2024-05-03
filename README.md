@@ -24,18 +24,18 @@ In the recast input file, you will need to modify the following entries:
 
 - **dids:**  your dataset id
 
-- **XSxEff:** This is the x-section times efficiency used as input to the local TopDataPreparation file. It must be provided in pb. 
+- **XSxEff:** This is the x-section times efficiency used as input to the local TopDataPreparation file. It must be provided in picobarns. 
 
 - **kfactor:** the kfactor of your sample
 
 - **shower:** the showering algorithm used by your sample.
 
 - **nominalWeight:** if you run the recast and it crashes at the online production step, it may be because the nominal weight of your sample is not included into the standard list. If this is the case, the log file will print the list of weights included in the sample. From this list you can choose the nominal weight to be used for your sample, and add it here. Please, be aware of the exact string to be used for the weight, if the weight's name has white spaces at the beginning or at the end of the string, don't remove them! The value must be provided in double quotes and within single quotes at the same time, i.e. '"my weight"'. 
-- **pileupFile:**  You need to check if your dids is present in the pileup files currently used by the tool  (`dev/AnalysisTop/PileupReweighting/user.iconnell.Top.PRW.MC16a.FS.v2/prw.merged.root` and `dev/AnalysisTop/PileupReweighting/user.iconnell.Top.PRW.MC16a.AF.v2/prw.merged.root`). If the dids is not present, you must generate your own pileup file as described here https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopxAODStartGuideR21#9_9_CP_TPileupReweighting_ERROR .  You must provide the full path to your custom pileup file in this field. 
+- **pileupFile_mc16a /pileupFile_mc16d / pileupFile_mc16e:**  You need to check if your DSID is present in the pileup files currently used by the tool  (`dev/AnalysisTop/PileupReweighting/user.iconnell.Top.PRW.MC16a.FS.v2/prw.merged.root` and `dev/AnalysisTop/PileupReweighting/user.iconnell.Top.PRW.MC16a.AF.v2/prw.merged.root`). If the DSID is not present, you must generate your own pileup file per mc16 campaing (this is very important, please don't merge the pileup files of all mc16 campaigns in only one file since the pileup reweighting tool does not 'see' the mc16 campaing and it will use whatever it finds in the pileup file that corresponds to the DSID, giving as a consequence a wrong pileup weight!) as described here https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopxAODStartGuideR21#9_9_CP_TPileupReweighting_ERROR .  You must provide the full path to your custom pileup files in this field. 
 
-- **muMin:** This is the minimum value to be used for TRexFitter for the signal stregth.
+- **muMin:** This is the minimum value to be used by TRexFitter for the signal stregth.
 
-- **muMax:** This is the minimum value to be used for TRexFitter for the signal stregth.
+- **muMax:** This is the maximum value to be used by TRexFitter for the signal stregth.
 
 - **input_mc16a:**  the full path in EOS to the mc16a sample. 
 

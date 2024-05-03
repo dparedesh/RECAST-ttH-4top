@@ -78,7 +78,8 @@ online_production_mc16:
     imagetag: recast-exot-2019-26-a13fd138
     resources:
       - kerberos: true
-      - kubernetes_memory_limit: '10Gi'
+      - kubernetes_memory_limit: '8Gi'
+      - kubernetes_job_timeout: 1209600
   publisher:
     publisher_type: interpolated-pub
     publish:

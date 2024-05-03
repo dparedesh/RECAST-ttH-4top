@@ -18,7 +18,9 @@ example_inputs:
       nominalWeight: '' # "My test weight"'
       muMin: '0'
       muMax: '10'
-      pileupFile: 'root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/PILEUP/pileup.root'
+      pileupFile_mc16a: 'root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/PILEUP/pileup_mc16a.root'
+      pileupFile_mc16d: 'root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/PILEUP/pileup_mc16d.root'
+      pileupFile_mc16e: 'root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/PILEUP/pileup_mc16e.root'
       input_mc16a: root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/Signal_DxAOD/mc16_13TeV.508789.MGPy8EG_A14N23LO_DM_4topscalar_p350_c1_nonallhad.deriv.DAOD_TOPQ1.e8485_a875_r9364_p4031
       input_mc16d: root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/Signal_DxAOD/mc16_13TeV.508789.MGPy8EG_A14N23LO_DM_4topscalar_p350_c1_nonallhad.deriv.DAOD_TOPQ1.e8485_a875_r10201_p4031
       input_mc16e: root://eosuser.cern.ch//eos/project/r/recast/atlas/ANA-EXOT-2019-26/Signal_DxAOD/mc16_13TeV.508789.MGPy8EG_A14N23LO_DM_4topscalar_p350_c1_nonallhad.deriv.DAOD_TOPQ1.e8485_a875_r10724_p4031

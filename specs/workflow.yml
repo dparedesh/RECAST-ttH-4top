@@ -5,7 +5,7 @@ stages:
     scheduler_type: singlestep-stage
     parameters:
       input_mc16: {step: init, output: input_mc16a}
-      pileup: {step: init, output: pileupFile}
+      pileup: {step: init, output: pileupFile_mc16a}
       dids: {step: init, output: dids}
       XSxEff: {step: init, output: XSxEff}
       kfactor: {step: init, output: kfactor}
@@ -25,7 +25,7 @@ stages:
     scheduler_type: singlestep-stage
     parameters:
       input_mc16: {step: init, output: input_mc16d}
-      pileup: {step: init, output: pileupFile}
+      pileup: {step: init, output: pileupFile_mc16d}
       dids: {step: init, output: dids}
       XSxEff: {step: init, output: XSxEff}
       kfactor: {step: init, output: kfactor}
@@ -45,7 +45,7 @@ stages:
     scheduler_type: singlestep-stage
     parameters:
       input_mc16: {step: init, output: input_mc16e}
-      pileup: {step: init, output: pileupFile}
+      pileup: {step: init, output: pileupFile_mc16e}
       dids: {step: init, output: dids}
       XSxEff: {step: init, output: XSxEff}
       kfactor: {step: init, output: kfactor}
