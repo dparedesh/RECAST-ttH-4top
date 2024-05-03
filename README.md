@@ -4,6 +4,9 @@
 
 This repository contains the RECAST of the data analysis published in Ref. [1]. That analysis aimed to look for a new physics process in the LHC data, $t\bar tH/A \rightarrow t\bar tt\bar t$,  where $H/A$ is a new particle.
 
+The tool is set to run in the [REANA](https://reanahub.io/) cluster with Kubernetes. 
+
+
 **RECAST** is a way to fully automate and preserve the analysis workflow, based on a CD/CI pipeline that takes samples of simulated events as input, preprocesses those samples, and then performs a statistical interpretation of the preprocessed samples. 
 
 >[!NOTE]
@@ -23,8 +26,13 @@ The recommended way to start preparing an analysis for RECAST is to
 2. Prepare Scripts for the individual Steps of the analysis.
 3. Write a Workflow Description for your analysis.
 
+# Description of the tool
 
+The tool consists of two steps: 
 
+- `online_production`: It performs the preprocessing of the samples of simulated events: data cleaning and selection. It outputs the preprocessed sample, `offline_ntuple`. This step is done in parallel for the three mc16 campaigns, i.e. mc16a, mc16d, and mc16e. Apart of the simulated samples, it needs the input parameters defined in the next section.
+  
+- `interpretation`: It takes as input the `offline_ntuple` of the three mc16 campaigns, and the extra parameters explained in the next section.  It will output the full statistical interpretation for the signal.  
 
 # How to use the tool?
 
@@ -72,13 +80,13 @@ In the recast input file, you will need to modify the following entries:
 >  The RECAST for this analysis is  to be run with samples with the following tag: `DAOD_TOPQ1.e7743_a875_r<reco>_p4031`. Samples with a newer ptag will make the online production step to crash. 
 
 
-Once you have done the proper changes in your `recast.yml` file, you can just submit your job to the [REANA](https://reana.cern.ch/) cluster with the following command:
+Once you have done the proper changes in your `recast.yml` file, you can just submit your job to the [REANA](https://reanahub.io/) cluster with the following command:
 
        recast submit analysis/ttH4tSSML --backend reana --tag  <your_tag>
 
 
 
-The workflow will output the full folder of results as provided by [TRexFitter](https://github.com/liboyang0112/TRExFitter) with name  **recast_output**. You can download the full folder from REANA to check your results with the following command:
+The workflow will output the full folder of results as provided by [TRexFitter](https://github.com/liboyang0112/TRExFitter) with name  **recast_output**. You can download the full folder from [REANA](https://reanahub.io/) to check your results with the following command:
 
 
        reana-client  download -w recast-<your_tag> interpretation_step/recast_output
