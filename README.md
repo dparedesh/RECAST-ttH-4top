@@ -30,9 +30,9 @@ The recommended way to start preparing an analysis for RECAST is to
 
 The tool consists of two steps: 
 
-- `online_production`: It performs the preprocessing of the samples of simulated events: data cleaning and selection. It outputs the preprocessed sample, `offline_ntuple`. This step is done in parallel for the three mc16 campaigns, i.e. mc16a, mc16d, and mc16e. Apart of the simulated samples, it needs the input parameters defined in the next section.
+- `online_production`: It performs the preprocessing of the samples of simulated events: data cleaning and selection. It outputs the preprocessed sample, `offline_ntuple`. This step is done in parallel for the three mc16 campaigns, i.e. mc16a, mc16d, and mc16e. Apart from the simulated samples, it needs the input parameters defined in the next section. The tool used in this step can be found in this repo: https://github.com/dparedesh/baseline-selection-4tops
   
-- `interpretation`: It takes as input the `offline_ntuple` of the three mc16 campaigns, and the extra parameters explained in the next section.  It will output the full statistical interpretation for the signal.  
+- `interpretation`: It takes as input the `offline_ntuple` of the three mc16 campaigns, and the extra parameters explained in the next section.  It will output the full statistical interpretation of the signal. The tool used for this is the official version of [TRexFitter](https://github.com/liboyang0112/TRExFitter).  
 
 # How to use the tool?
 
