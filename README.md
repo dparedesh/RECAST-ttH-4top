@@ -15,7 +15,7 @@ This repository contains the RECAST of the data analysis published in Ref. [1]. 
 >
 >- Re-execute the statistical analysis in order to determine whether the model is ruled out or not (e.g. by calculating a CLs value).
 
-## Steps to build a RECAST
+# Steps to build a RECAST
 
 The recommended way to start preparing an analysis for RECAST is to
 
@@ -26,7 +26,7 @@ The recommended way to start preparing an analysis for RECAST is to
 
 
 
-## How to use the tool?
+# How to use the tool?
 
 Define the variables 
 
