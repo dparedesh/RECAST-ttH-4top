@@ -103,8 +103,8 @@ The results obtained with this tool can be seen in Figures 1 and 2.  The tool wa
 
 
 <p align="center">
-<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/6ace51d4-ffa4-466f-aa45-ee0bb1eb18bc" align="center" height="300"  ></a>
-<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/41a47230-b682-4f3a-aa55-5fa7408b236e" align="center" height="310"  ></a>    
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/6ace51d4-ffa4-466f-aa45-ee0bb1eb18bc" align="center" height="280"  ></a>
+<a href="url"><img src="https://github.com/dparedesh/recast-ttH-4tops/assets/13987503/41a47230-b682-4f3a-aa55-5fa7408b236e" align="center" height="285"  ></a>    
 </p>
 <p align="center"><sub>Figure 1: Upper limits computed at 95% CL on the production rate of the  $t\bar tH/A \rightarrow t\bar tt\bar t$ signal (left)[1], and $S_8S_8 \rightarrow t\bar tt\bar t$ signal (right) [3]. </sup></p>  
 
